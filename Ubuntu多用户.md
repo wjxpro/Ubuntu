@@ -29,6 +29,8 @@ root@viewer-System-Product-Name:/home/viewer#
 ### 1. 添加多用户
 ```shell
 sudo adduser ${new_username}
+
+sudo deluser [--remove-home] ${username}
 ```
 ### 2. 分配sudo权限
 

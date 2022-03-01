@@ -42,12 +42,15 @@ wine uninstaller  # 卸载软件
 
 ### 服务器远程使用
 #### a. [Xshell、Xftp、Xmanager](https://www.netsarang.com/zh/)
-#### b. <a href="https://pgy.oray.com/" target="-blank" title="蒲公英"><img src="img/icon_pgy.png" height=24><font color=#b1b1b1> 蒲公英</font></a>
+#### b. <a href="https://pgy.oray.com/" target="-blank" title="蒲公英官网"><img src="img/icon_pgy.png" height=24><font color=#b1b1b1> 蒲公英</font></a>
 详见[Ubuntu服务器远程使用.md](./Ubuntu服务器远程使用.md)
-#### c. <a href="https://sunlogin.oray.com/" target="-blank" title="向日葵"><img src="img/icon_sun.png" height=24><font color=#b1b1b1> 向日葵</font></a>
+#### c. <a href="https://sunlogin.oray.com/" target="-blank" title="向日葵官网"><img src="img/icon_sun.png" height=24><font color=#b1b1b1> 向日葵</font></a>
 
 ### 使用系统盘破解实体机
-#### 1. 进入系统盘的`Try Ubuntu`
-#### 2. 获取Root权限
-#### 3. 打开实体机目录
-#### 4. 使用Root权限操作
+1. 进入系统盘的`Try Ubuntu`
+2. 打开Try Ubuntu的终端，输入下面的命令获取Root权限：
+```bash
+sudo passwd root
+```
+3. 打开实体机目录
+4. 可以使用Root权限操作

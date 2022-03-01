@@ -94,8 +94,8 @@ vi/vim ${filename}  # 更高级的vim可能需要自行安装
 # 在文件查看窗口编辑文件
 gedit ${filename}
 
-# 查看该目录下文件夹大小
-du -h --max-depth=1
+# 查看目录下文件夹大小
+du -h --max-depth=1 ${dirpath} # 1递归显示到该目录下的第几层
 ```
 
 ### 解压
@@ -149,7 +149,8 @@ watch [-n ${second}] ${your_command}
 ```
 
 ## 键盘命令
-> <kbd>Ctrl</kbd> + <kbd>Insert</kbd>：复制  
+> <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F1~F12</kbd>：进入tty1~tty12界面
+<kbd>Ctrl</kbd> + <kbd>Insert</kbd>：复制  
 <kbd>Shift</kbd> + <kbd>Insert</kbd>：粘贴  
 <kbd>Ctrl</kbd> + <kbd>C</kbd>：强制中断运行  
 <kbd>Ctrl</kbd> + <kbd>Z</kbd>：强制暂停运行  
