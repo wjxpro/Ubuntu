@@ -6,6 +6,8 @@
 [TOC]
 
 ## 〇、准备工作
+参考：[UltraISO（软碟通）制作U盘启动盘完整教程](https://zhuanlan.zhihu.com/p/326406632)
+
 下载Ubuntu系统镜像（.iso文件），并使用`UltraISO`软件制作U盘启动盘：
 - 插入U盘，此U盘在稍后会被<font color='red' size=4><b>格式化</b></font>，注意备份数据；
 - 在UltraISO中的本地目录，选择下载好的镜像文件，然后双击；
@@ -25,11 +27,10 @@
 2. 点击`Install Ubuntu 18.04 LTS`
 3. `Welcone`：欢迎界面，选择语言English（或中文）
 4. `Keyboard layout`：键盘布局，默认即可
-5. `Updates and other software`：更新和其他软件，选择`Minimal installation`最小安装，服务器不需要其他工具
-6. `Installation type`：安装类型，选择`Something else`，可以手动分区
-    - `New Partition Table`：新建分区表，可以格式化之前的系统及分区，也就是重装电脑，**安装双系统不要点！！！** 会把Windows系统删掉。
-    - `free space`：空闲空间，选中
-    - 点击<kbd>+</kbd>，按照如下方式依次分区：
+5. `Updates and other software`：更新和其他软件，个人用户可以选择正常安装，服务器因为不需要其他工具可以选择`Minimal installation`最小安装
+6. `Installation type`：安装类型，手动分区选择`Something else`：
+    - `New Partition Table`：新建分区表，可以格式化之前的磁盘分区表，然后从零分区，也就是格式化磁盘重装电脑，**安装双系统不要点！！！** 会把Windows系统的分区表删掉。
+    - 选择需要安装系统的磁盘，选中`free space`空闲空间，然后点击<kbd>+</kbd>，或者直接双击空闲空间，按照如下方式依次分区：
         <table>
             <tr>
                 <th colspan="2">分区类型</th>
