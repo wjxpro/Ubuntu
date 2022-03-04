@@ -5,19 +5,11 @@
 
 [TOC]
 
-## 说明
-所有命令均在终端运行！！！
-> + `#`：注释  
-> + `${}`：按需自行更改  
-> + `[]`：可选参数  
-> + `()`：可替换为括号内命令  
-> + `-`：多个参数可以共用一个`-`
-
 ## 系统
 ### 管理员
 ```shell
-# 进入root环境
-su [root]
+# 切换到某个用户下，不输入为root用户
+su ${user_name}
 
 # 使用管理员权限运行命令
 sudo ${your_command}
@@ -95,7 +87,7 @@ vi/vim ${filename}  # 更高级的vim可能需要自行安装
 gedit ${filename}
 
 # 查看目录下文件夹大小
-du -h --max-depth=1 ${dirpath} # 1递归显示到该目录下的第几层
+du -h --max-depth=1 ${dirpath} # 1为递归显示到该目录下的第1层
 ```
 
 ### 解压
@@ -117,7 +109,7 @@ unzip ${filename}
 > + -N ：比后面接的日期(yyyy/mm/dd)还要新的才会被打包进新建的文件中！
 > + --exclude FILE：在压缩的过程中，不要将 FILE 打包！
 
-## 运行
+## 进程
 ```shell
 # 显示进程
 ps

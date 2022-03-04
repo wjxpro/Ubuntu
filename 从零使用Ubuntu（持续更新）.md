@@ -1,4 +1,4 @@
-# **从零快速使用Ubuntu**
+# **从零使用Ubuntu**
 *主页：https://github.com/wjxpro*
 
 *邮箱：804359553@qq.com*
@@ -33,10 +33,13 @@ Ubuntu免费，Windows收费。
 ### 2. Ubuntu服务器远程使用
 详见[Ubuntu服务器远程使用.md](Ubuntu服务器远程使用.md)
 
-### 3. 安装NVIDIA显卡驱动
+### 3. 配置Python环境
+详见[Ubuntu下配置Anaconda.md](Ubuntu下配置Anaconda.md)
+
+### 4. 安装NVIDIA显卡驱动
 详见[Ubuntu安装NVIDIA驱动、CUDA、cudnn.md](Ubuntu安装NVIDIA驱动、CUDA、cudnn.md)
 
-### 4. 搭建深度学习平台
+### 5. 搭建深度学习平台
 详见[Ubuntu下从零搭建深度学习平台.md](Ubuntu下从零搭建深度学习平台.md)
 
 ## 三、使用Ubuntu
