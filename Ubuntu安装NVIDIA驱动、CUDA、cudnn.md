@@ -27,9 +27,9 @@
 nvcc --version
 ```
 
-## CUDA 10.0
+## 安装第二个CUDA 10.0
 ```shell
-sudo bash cuda_10.0.130_410.48_linux.run
+sudo ./cuda_10.0.130_410.48_linux.run
 ```
 
 ```shell
@@ -54,3 +54,51 @@ Install the CUDA 10.0 Samples?
 Enter CUDA Samples Location
  [ default is /home/viewer ]: 
 ```
+
+建立软链接：
+```shell
+sudo rm -rf cuda
+sudo ln -s /usr/local/cuda-10.0 /usr/local/cuda
+```
+
+## 卸载显卡驱动
+```shell
+# 两种卸载方式
+sudo apt --purge remove nvidia*
+sudo apt autoremove
+
+sudo /usr/bin/nvidia-uninstall
+```
+
+## 重装显卡驱动出错
+### 报错一：
+```
+An NVIDIA kernel module ‘nvidia-drm‘ appears to already be loaded in your kernel...
+```
+进入tty界面：
+<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F1~F12</kbd>
+
+```shell
+
+sudo systemctl isolate multi-user.target
+
+# 卸载内核模块
+sudo modprobe -r nvidia-drm
+
+# 重装显卡驱动
+sudo ./NVIDIA-Linux-x86_64-XXXXXXX.run
+
+# 重装完成后，可以使用nvidia-smi查看是否正常安装
+
+# 默认使用图形界面启动
+sudo systemctl set-default graphical.target
+
+# 重启
+sudo reboot
+```
+### 报错二：
+```
+The CC version check failed
+The kernel was built with gcc version XXX, but the current compiler version is cc XXX...
+```
+用`sudo /usr/bin/nvidia-uninstall`命令卸载显卡驱动，然后重装。

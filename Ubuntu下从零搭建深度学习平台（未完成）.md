@@ -35,6 +35,43 @@
 > <font color=red><b>注意</b></font>：如果已经配置过国内镜像源，则`conda`命令后不要加`-c pytorch`。
 
 ### caffe
+> 在Ubuntu系统版本大于17.04时，可以使用apt命令安装caffe
+
+```bash
+sudo vim /etc/apt/sources.list
+# 修改为阿里源
+
+sudo apt clean
+
+sudo apt update
+
+# 选择安装GPU版或是CPU版
+sudo apt install caffe-cuda
+sudo apt install caffe-cpu
+
+# 安装依赖
+pip install numpy
+pip install opencv-python
+pip install scikit-image
+pip install protobuf
+```
+
+caffe包安装在`/usr/lib/python3/dist-packages`，两种使用方法：
+#### 一
+```python
+import sys
+sys.path.append('/usr/lib/python3/dist-packages')
+import caffe
+```
+#### 二
+使用anaconda时，把caffe包复制到`${anaconda3}/lib/python3.6/site-packages/`下。
+
+#### ModuleNotFoundError: No module named 'caffe._caffe'
+使用3.6版本的Python
+
+#### ModuleNotFoundError: No module named 'google'
+没有安装`protobuf`
+
 
 ### keras
 

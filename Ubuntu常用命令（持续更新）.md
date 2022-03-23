@@ -141,7 +141,7 @@ watch [-n ${second}] ${your_command}
 ```
 
 ## 键盘命令
-> <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F1~F12</kbd>：进入tty1~tty12界面
+> <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F1\~F12</kbd>：进入tty1~tty12界面
 <kbd>Ctrl</kbd> + <kbd>Insert</kbd>：复制  
 <kbd>Shift</kbd> + <kbd>Insert</kbd>：粘贴  
 <kbd>Ctrl</kbd> + <kbd>C</kbd>：强制中断运行  
