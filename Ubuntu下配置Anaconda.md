@@ -114,9 +114,18 @@ Python的社区很庞大，这与他自带的、超好用的包管理工具`pip`
 一般就使用清华大学镜像站（因为界面好看【误】）。具体配置方法请在镜像站主页点击“相关链接”下的“使用帮助”，找到`anaconda`配置`conda`源，找到`pypi`配置`pip`源。
 
 #### 永久配置`pip`源命令
-**（在终端中输入命令）**
+**在终端中输入以下命令：**
 ```shell
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+```
+之后会在对应系统下自动生成相应配置文件，其所在位置如下：
+> + windows: C:\Users\${USER_NAME}\AppData\Roaming\pip\pip.ini
+> + Ubuntu: ~/.config/pip/pip.conf
+
+其内容如下：
+```bash
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 #### 其它`pip`源
@@ -127,6 +136,16 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 中国科学技术大学：http://pypi.mirrors.ustc.edu.cn/simple/
 华中理工大学：http://pypi.hustunique.com/
 山东理工大学：http://pypi.sdutlinux.org/
+
+#### `pip`源注意
+如使用http地址的源，可以在配置文件下添加内容避免`trusted-host`警告。以使用http地址的阿里源为例：
+```bash
+[global]
+index-url = http://mirrors.aliyun.com/pypi/simple/
+
+[install]
+trusted-host = mirrors.aliyun.com
+```
 
 #### `conda`源注意
 > 如果需要安装`PyTorch`，要在`default_channels:`后面加上：

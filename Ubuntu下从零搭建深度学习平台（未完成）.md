@@ -35,6 +35,7 @@
 > <font color=red><b>注意</b></font>：如果已经配置过国内镜像源，则`conda`命令后不要加`-c pytorch`。
 
 ### caffe
+#### apt安装
 > 在Ubuntu系统版本大于17.04时，可以使用apt命令安装caffe
 
 ```bash
@@ -57,21 +58,24 @@ pip install protobuf
 ```
 
 caffe包安装在`/usr/lib/python3/dist-packages`，两种使用方法：
-#### 一
+##### 一
 ```python
 import sys
 sys.path.append('/usr/lib/python3/dist-packages')
 import caffe
 ```
-#### 二
+##### 二
 使用anaconda时，把caffe包复制到`${anaconda3}/lib/python3.6/site-packages/`下。
 
-#### ModuleNotFoundError: No module named 'caffe._caffe'
+##### ModuleNotFoundError: No module named 'caffe._caffe'
 使用3.6版本的Python
 
-#### ModuleNotFoundError: No module named 'google'
+##### ModuleNotFoundError: No module named 'google'
 没有安装`protobuf`
 
+#### 编译安装
+参考：[Ubuntu18.04LTS下基于 Anaconda3 安装和编译 Caffe-GPU](https://blog.csdn.net/CAU_Ayao/article/details/83536320)
+##### 
 
 ### keras
 
