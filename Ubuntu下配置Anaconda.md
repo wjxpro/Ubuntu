@@ -6,13 +6,13 @@
 [TOC]
 
 ## 〇、Anaconda是什么？
-![Anaconda_Logo](img/Anaconda_Logo.png)
+![Anaconda_Logo](./img/Anaconda_Logo.png)
 Anaconda是用于科学计算的**Python发行包**。里面不仅包含了Python的解释器和标准库（可能不是最新版）、常用的第三方库（`numpy`、`scipy`、`openpyxl`等）、自带的包管理工具`conda`，在Windows环境下的安装包还集成了几大常用的IDE（`Jupyter`、`Spyder`等）。<b><font color='red'>一句话，想用Python，装Anaconda就对了。</font></b>（小字：安装包也就500M左右，如果嫌大或者不需要那么多东西可以装Miniconda，流程差不多。）
 
 ## 一、安装Anaconda
 ### 1. 下载安装包
 去[清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/)下载所需版本的Anaconda安装包。安装包位置在镜像站的`镜像列表`->`anaconda`->`archive/`，进入后请按日期筛选，找到最新版本点击下载，这里以`Anaconda3-2020.07-Linux-x86_64.sh`为例（.sh是linux的可执行文件）。
-![Anaconda安装包截图](img/Anaconda安装包截图.png)
+![Anaconda安装包截图](./img/Anaconda安装包截图.png)
 
 ### 2. 两个小问题
 + 为什么用清华镜像？因为帮助写的好，配源省事，不嫌麻烦也可以用阿里（听说比较快）、豆瓣、中科大等。
@@ -106,8 +106,8 @@ Python 3.8.3
 Python的社区很庞大，这与他自带的、超好用的包管理工具`pip`密切相关。而Anaconda附带的包管理工具`conda`，又因为集成了虚拟环境的管理，而在工程项目中应用甚广。但是，这两个工具默认的下载网址是官网，也就是国外网站，安装第三方包的时候会特别慢。所以伟大的劳动人民创建了“镜像站”这种东西，就是把国外的软件、库之类的先搬到国内的服务器，我们再访问该服务器，由于只经国内路由，因此能达到更快的下载速度。
 
 常用的镜像站主页：
-+ <a href="https://mirrors.tuna.tsinghua.edu.cn/" target="-blank" title="清华大学开源软件镜像站"><font size=4><b>清华大学开源软件镜像站 </b></font><img src="img/tuna_tsinghua.png" width=45></a>
-+ <a href="https://developer.aliyun.com/mirror/" target="-blank" title="阿里云官方镜像站">阿里云官方镜像站 </font><img src="img/aliyun.ico"></a>
++ <a href="https://mirrors.tuna.tsinghua.edu.cn/" target="-blank" title="清华大学开源软件镜像站"><font size=4><b>清华大学开源软件镜像站 </b></font><img src="./img/tuna_tsinghua.png" width=45></a>
++ <a href="https://developer.aliyun.com/mirror/" target="-blank" title="阿里云官方镜像站">阿里云官方镜像站 </font><img src="./img/aliyun.ico"></a>
 + [中国科学技术大学开源软件镜像站](https://mirrors.ustc.edu.cn/)
 
 ### 2. 方法

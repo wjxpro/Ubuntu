@@ -28,7 +28,7 @@
 ## 〇、Ubuntu入门
 ### 简介
 <a href="https://ubuntu.com/" target="-blank" title="ubuntu 官网">
-<img src="img/ubuntu_logo.svg">
+<img src="./img/ubuntu_logo.svg">
 </a>
 Ubuntu是linux的发行版。LTS意思是长期支持（Long Term Support）。这是基础库的开发者对库的使用者的一个承诺，保证某个版本的库发布之后的很长一段事件之内都得到支持。如果此版本发现一些紧急问题需要修复，那么就会在这个版本上进行更新。通常这些问题的修复都不会导致 API 变化（API 保证长期兼容），所以版本号的前两位是不变的，通常只变化第三位。
 

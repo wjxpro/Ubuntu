@@ -55,7 +55,7 @@ sudo apt install net-tools
 需要自行搭建局域网，使用`蒲公英`可快速地在多个设备间搭建起**对等网络**（免费版只有3个）。
 #### 蒲公英官网
 <a href="https://pgy.oray.com/" target="-blank" title="蒲公英SD-WAN">
-<img src="img/icon_pgy.png" height="24"> <span style="color: #b1b1b1;">蒲公英</span></a>
+<img src="./img/icon_pgy.png" height="24"> <span style="color: #b1b1b1;">蒲公英</span></a>
 
 #### 服务端配置
 1. 注册贝锐科技账号，进行简单配置；

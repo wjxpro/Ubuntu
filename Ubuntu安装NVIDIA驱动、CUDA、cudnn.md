@@ -6,14 +6,14 @@
 [TOC]
 
 ## 安装NVIDIA驱动、CUDA、cudnn
-![nvidia-logo](img/nvidia_logo_horizontal.png)
+![nvidia-logo](./img/nvidia_logo_horizontal.png)
 
 + [Ubuntu18.04下安装Nvidia驱动和CUDA10.1＋CUDNN](https://blog.csdn.net/BigData_Mining/article/details/99670642)
 + [NVIDIA CUDA Installation Guide for Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#runfile-overview)
 + [cuda官网下载地址](https://developer.nvidia.com/cuda-toolkit-archive)
 + [cudnn官网下载地址](https://developer.nvidia.com/rdp/cudnn-archive)
 
-请参照链接1进行安装，使用依次下载NVIDIA驱动、CUDA、cudnn，国内即可在官网上快速下载cuda和cudnn，下载cudnn需要注册Nvidia账号。注意版本匹配问题，推荐全部下载本地安装文件。
+请参照链接1进行安装，使用依次下载NVIDIA驱动、CUDA、cudnn。国内即可在官网上快速下载cuda和cudnn，下载cudnn需要注册Nvidia账号。注意版本匹配问题，推荐全部下载本地安装文件。
 
 以下所有命令示例文件为：
 + NVIDIA驱动：`NVIDIA-Linux-x86_64-470.182.03.run`
