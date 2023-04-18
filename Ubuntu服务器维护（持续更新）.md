@@ -61,8 +61,8 @@ GRUB_DEFAULT="1> 4"
 sudo update-grub
 ```
 
-## 常见问题
-### 1. *无法使用make编译，出现makefile: XXXXXXX failed*
+## 问题及解决
+### 无法使用make编译，出现makefile: XXXXXXX failed
 如安装CUDA在编译`deviceQuery`时，提示：
 ```shell
 g++: No such file or directory
@@ -74,10 +74,23 @@ make: *** [deviceQuery.o] Error 1
 sudo apt-get install libncurses5-dev
 ```
 
-### 2. *几分钟自动断网*
+### 几分钟自动断网
 在`/etc/ppp/options`中，注释掉`Icp-echo-failure 4`和`Icp-eco-interal 30`。这两是向服务器发送询问，所以将两个注释掉就能阻止发送询问，就不会造成断网。
 ```shell
 sudo gedit /etc/ppp/options
 ```
     # Icp-echo-failure 4
     # Icp-eco-interal 30
+
+### qt.qpa.screen: QXcbConnection: Could not connect to display Could not connect to any X display.
+在环境变量配置文件里添加：
+```bash
+export QT_QPA_PLATFORM='offscreen'
+```
+参考[...的两种解决方法](https://panfake.com/2020/03/qxcbconnection-could-not-connect-to-display/)
+
+### 开机出现 EDAC skx: ECC is disabled on imc 0
+显卡驱动出问题导致开机卡死。解决方案如下：
++ [Ubuntu18.04 如何安装GPU驱动](https://blog.csdn.net/weixin_43156127/article/details/116270396)
+
+<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F2</kbd>进入tty2界面闪烁，无法正确输入登录信息。可以长按此三键，会暂时进入图形界面，再次按此三键，则进入tty2不再闪烁。

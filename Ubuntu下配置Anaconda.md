@@ -24,7 +24,7 @@ Anaconda是用于科学计算的**Python发行包**。里面不仅包含了Pytho
 ```shell
 bash Anaconda3-2020.07-Linux-x86_64.sh
 ```
-<b><font color='red'>注意</font></b>：此处不要在root用户下安装，也不要使用sudo命令安装，否则安装的Anaconda软件所有者是root用户，普通用户无法直接使用python命令。
+> <b><font color='red'>注意</font></b>：此处不要在root用户下安装，也不要使用sudo命令安装，否则安装的Anaconda软件所有者是root用户，普通用户无法直接使用python命令。
 
 一路回车。其中几个选项可以按下述方法配置：
 ```shell
@@ -46,7 +46,7 @@ Anaconda3 will now be installed into this location:
 Do you wish the installer to initialize Anaconda3
 by running conda init? [yes|no]
 ```
-`yes`，回车。启动终端默认激活Anaconda的`base`环境，否则默认不启动。
+`yes`，回车。启动终端默认激活Anaconda的`base`环境，**强烈建议启用**，非常方便，否则默认不启动。
 ```shell
 If you'd prefer that conda's base environment not be activated on startup, 
    set the auto_activate_base parameter to false: 
@@ -65,28 +65,8 @@ Get a free trial at: https://www.anaconda.com/pycharm
 ```
 至此，安装完成。
 
-### 多用户共用anaconda
-`conda init`默认配置在安装`anaconda`用户（管理员用户）的`~/.bashrc`下。其他用户使用时，只需要将管理员用户的`.bashrc`复制到自己的`~`目录下，然后重连终端即可使用。
-
-也可以自行配置，一个`conda init`示例如下：
-```bash
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/viewer/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/viewer/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/viewer/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/viewer/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-```
-
 ## 二、配置环境变量
+### 1. 未使用`conda init`
 如果此前在`conda init`处未输入`yes`，则需要自行配置`anaconda`环境变量。
 
 在终端上直接输入以下命令可以**临时设置**环境变量：
@@ -116,6 +96,27 @@ source /etc/profile
 完成上述步骤，环境变量就配置好了。此时再输入`python -V`查看python版本，可以看到：
 ```
 Python 3.8.3
+```
+
+### 2. 多用户共用anaconda
+`conda init`默认配置在安装`anaconda`用户（管理员用户）的`~/.bashrc`下。其他用户使用时，只需要将管理员用户的`.bashrc`复制到自己的`~`目录下，然后重连终端即可使用。
+
+也可以自行配置，一个`conda init`示例如下：
+```bash
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/viewer/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/viewer/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/viewer/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/viewer/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 ```
 
 ## 三、设置国内镜像源
@@ -191,25 +192,49 @@ trusted-host = mirrors.aliyun.com
 > + `Spyder`：仿`Matlab`的Python IDE。
 > ...
 
-### 2. 包管理
-**（在终端中输入命令）**
+### 2. python测试cuda
+```python
+import torch
+print(torch.cuda.is_available())  # CUDA是否可用，返回True或False
+
+import sys
+print(sys.executable)  # 返回python所在路径
+```
+### 3. `pip`命令
+**（在终端中输入）**
 ```shell
 # 使用pip安装第三方库
 pip install ${package_name} [-i https://pypi.tuna.tsinghua.edu.cn/simple]  # -i：指定下载所用的镜像站
 # 例：
 pip install numpy
 
+# 导出当前依赖库
+pip freeze > ${some_name}.txt
+# 例：
+pip freeze > requirements.txt
+```
+
+### 4. `conda`命令
+```shell
 # 使用conda安装第三方库
 conda install ${package_name}
 # 例：
 conda install numpy
+
+# 查看使用源
+conda config --show-sources
+
+# 虚拟环境
+conda activate ${your_env_name}  # 创建虚拟环境的用户
+source activate ${your_env_name}  # 其他用户
+conda deactivate  # 退出虚拟环境
 ```
 
-### 3. `pip`与`conda`
+### 5. `pip`与`conda`对比
 `conda`优点：安装第三方库时会检查环境，减少安装后失败可能；导出requirements时会记下安装时使用的网址，方便迁移环境；拥有虚拟环境管理...
 `conda`缺点：可用镜像站少，下载速度可能不如`pip`；检查环境耗时；配置镜像源需要注意...
 `pip`优点：Python自带的；镜像站多，下载快...
 `pip`缺点：迁移环境不靠谱...
 
-### 4. 虚拟环境
+### 6. 虚拟环境
 详见[conda虚拟环境的使用.md](../开发环境/conda虚拟环境的使用.md)
