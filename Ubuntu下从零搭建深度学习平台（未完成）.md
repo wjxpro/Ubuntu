@@ -23,7 +23,7 @@
 在官网中查询安装命令。
 + [Previous PyTorch Versions](https://pytorch.org/get-started/previous-versions/)
 
-> <font color=red><b>注意</b></font>：如果已经配置过国内镜像源，则`conda`命令后不要加`-c pytorch`。
+`-c pytorch`的意思是：选择`pytorch`仓库。这样做的前提是，配置conda源时，pytorch不在`default_channels`，而在`custom_channels`中。如果已经将`pytorch`仓库配置到`default_channels`，则不应该使用`-c pytorch`。
 
 ### TensorFlow
 <a href="https://tensorflow.google.cn/" target="-blank" title="TensorFlow 官网">

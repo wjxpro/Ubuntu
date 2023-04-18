@@ -20,11 +20,11 @@ Anaconda是用于科学计算的**Python发行包**。里面不仅包含了Pytho
 
 ### 3. 安装流程
 **安装时可以按照以下示例进行选择。**
-在普通用户下打开终端，用`cd`命令进入到下载好的安装包的路径，然后输入：
+在管理员用户下打开终端，用`cd`命令进入到下载好的安装包的路径，然后输入：
 ```shell
 bash Anaconda3-2020.07-Linux-x86_64.sh
 ```
-<b><font color='red'>注意</font></b>：此处不要在root用户下也不要使用sudo命令，否则安装的Anaconda软件所有者是root用户，普通用户无法直接使用python命令。
+<b><font color='red'>注意</font></b>：此处不要在root用户下安装，也不要使用sudo命令安装，否则安装的Anaconda软件所有者是root用户，普通用户无法直接使用python命令。
 
 一路回车。其中几个选项可以按下述方法配置：
 ```shell
@@ -32,7 +32,7 @@ Do you accept the license terms? [yes|no]
 [no] >>> 
 Please answer 'yes' or 'no':'
 ```
-输入`yes`，回车。接受协议。
+`yes`，接受协议。
 ```shell
 Anaconda3 will now be installed into this location:
 /home/${xxx}/anaconda3
@@ -65,34 +65,51 @@ Get a free trial at: https://www.anaconda.com/pycharm
 ```
 至此，安装完成。
 
-## 二、配置环境变量
-安装完成后，在终端中输入`python -V`查看python版本，会提示：
-```shell
--bash: python: command not found
+### 多用户共用anaconda
+`conda init`默认配置在安装`anaconda`用户（管理员用户）的`~/.bashrc`下。其他用户使用时，只需要将管理员用户的`.bashrc`复制到自己的`~`目录下，然后重连终端即可使用。
+
+也可以自行配置，一个`conda init`示例如下：
+```bash
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/viewer/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/viewer/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/viewer/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/viewer/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 ```
-这是因为python还未添加到环境变量中。环境变是用来定义每个用户的操作环境，在用户使用诸如`python`的用户命令时，可以找到执行此命令对应的程序。
+
+## 二、配置环境变量
+如果此前在`conda init`处未输入`yes`，则需要自行配置`anaconda`环境变量。
 
 在终端上直接输入以下命令可以**临时设置**环境变量：
 ```shell
 export PATH=$PATH:/home/${user_name}/anaconda3/bin
 ```
-通常，可以通过修改环境变量配置文件`/etc/profile`或者`/etc/bashrc`或者`~/.bashrc`（详见[Ubuntu环境变量.md](Ubuntu环境变量.md)），达到**永久设置**环境变量的目的。
+也可以通过修改环境变量配置文件`/etc/profile`或者`~/.bashrc`（详见[Ubuntu环境变量.md](Ubuntu环境变量.md)），达到**永久设置**环境变量的目的。
 
-这里我们修改`profile`文件（此文件属于系统文件，要使用`sudo`获取root权限才能修改），输入：
+这里我们修改`/etc/profile`文件（此文件属于系统文件，要使用`sudo`获取root权限才能修改），输入：
 ```shell
 sudo vi /etc/profile  # 或者vim（使用方法请自行查找）
 
 # 如果有图形界面的话，也可以
 sudo gedit /etc/profile
 ```
-输入密码后进入文件，在文件的末尾加上以下代码：
+在文件的末尾加上以下代码：
 ```
-#Anaconda（这行是注释）
-export PATH=$PATH:/home/${user_name}/anaconda3/bin
+#Anaconda
+export PATH=$PATH:/home/viewer/anaconda3/bin
 ```
 此处路径根据自己anaconda安装路径更改（主要是更改路径中的用户名），然后保存并退出。
 
-最后重新载入配置文件，需要注销当前用户再登录（重启也行），如果是远程服务器则需要重新连接一下，或者使用`source`命令临时激活修改后的配置文件，输入：
+最后重新载入配置文件，需要注销当前用户再登录（重启也行），如果是远程服务器则需要重新连接，或者使用`source`命令临时激活修改后的配置文件，输入：
 ```shell
 source /etc/profile
 ```
@@ -100,6 +117,7 @@ source /etc/profile
 ```
 Python 3.8.3
 ```
+
 ## 三、设置国内镜像源
 **（不另外安装第三方库可以暂时不设置）**
 ### 1. 介绍
@@ -137,7 +155,9 @@ index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 华中理工大学：http://pypi.hustunique.com/
 山东理工大学：http://pypi.sdutlinux.org/
 
-#### `pip`源注意
+### 3. 注意点
+
+#### `pip`源
 如使用http地址的源，可以在配置文件下添加内容避免`trusted-host`警告。以使用http地址的阿里源为例：
 ```bash
 [global]
@@ -146,13 +166,6 @@ index-url = http://mirrors.aliyun.com/pypi/simple/
 [install]
 trusted-host = mirrors.aliyun.com
 ```
-
-#### `conda`源注意
-> 如果需要安装`PyTorch`，要在`default_channels:`后面加上：
-` - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch`
-注意保持格式一致。
-
-### 3. 其他注意点
 #### 下载包失败
 通过`conda`下载包时，有可能出现下载失败，可以在配置路径时，把`https`改成`http`（见下1），或者手动下载包，然后离线安装（见下2）。
 
@@ -174,7 +187,7 @@ trusted-host = mirrors.aliyun.com
 ## 四、使用
 ### 1. 简单使用
 > + Python解释器：Python解释器在安装根目录下的`python`，在终端中输入`python`实际就是运行了它。
-> + `Jupyter Notebook`：高级的Python交互式运行环境，需要使用浏览器打开。详见[Jupyter Notebook使用教程](../Python/Jupyter_Notebook使用教程.md)
+> + `Jupyter Notebook`：高级的Python交互式运行环境，需要使用浏览器打开。详见[Jupyter Notebook使用教程](../开发环境/Jupyter_Notebook命令.md)
 > + `Spyder`：仿`Matlab`的Python IDE。
 > ...
 
