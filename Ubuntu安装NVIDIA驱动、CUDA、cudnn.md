@@ -13,9 +13,21 @@
 + [cuda官网下载地址](https://developer.nvidia.com/cuda-toolkit-archive)
 + [cudnn官网下载地址](https://developer.nvidia.com/rdp/cudnn-archive)
 
-请参照链接1进行安装，使用依次下载NVIDIA驱动、CUDA、cudnn，国内即可在官网上快速下载cuda和cudnn，下载cudnn需要注册Nvidia账号。注意版本匹配问题，推荐全部下载本地安装文件，NVIDIA驱动和CUDA为`.run`文件，cudnn为`.tar`文件。
+请参照链接1进行安装，使用依次下载NVIDIA驱动、CUDA、cudnn，国内即可在官网上快速下载cuda和cudnn，下载cudnn需要注册Nvidia账号。注意版本匹配问题，推荐全部下载本地安装文件。
 
-### 1. 禁用nouveau并重启
+以下所有命令示例文件为：
++ NVIDIA驱动：`NVIDIA-Linux-x86_64-470.182.03.run`
++ CUDA：`cuda_11.3.1_465.19.01_linux.run`
++ cudnn：`cudnn-linux-x86_64-8.8.1.3_cuda11-archive.tar.xz`
+
+### 1. 安装依赖（gcc）
+```bash
+sudo apt update
+sudo apt install vim
+sudo apt install build-essential
+```
+
+### 2. 禁用nouveau并重启
 ```bash
 lsmod | grep nouveau
 #没有lsmod就安装
@@ -28,21 +40,21 @@ sudo vim /etc/modprobe.d/blacklist.conf
 blacklist nouveau
 options nouveau modeset=0
 ```
-然后更新并重启：
+保存，然后更新并重启：
 ```bash
 sudo update-initramfs -u
-reboot
-```
-
-### 2. 安装依赖（gcc）
-```bash
-sudo apt install build-essential
+sudo reboot
 ```
 
 ### 3. 删除旧的NVIDIA驱动
 ```bash
-sudo apt-get remove nvidia-*
-sudo apt-get autoremove
+# 两种卸载方式
+# 使用本地安装包安装的驱动使用这种方式
+sudo /usr/bin/nvidia-uninstall
+
+# 使用apt安装的驱动使用这种方式
+sudo apt --purge remove nvidia*
+sudo apt autoremove
 ```
 
 ### 4. 安装
@@ -52,16 +64,15 @@ sudo bash NVIDIA-Linux-x86_64-470.182.03.run
 
 #安装CUDA
 sudo bash cuda_11.3.1_465.19.01_linux.run
-# 为CUDA建立软链接
+# 为CUDA建立软链接（CUDA安装包有可能包含该功能）
 sudo ln -s /usr/local/cuda-11.3 /usr/local/cuda
 
 #安装cudnn
 # 解压cudnn，生成cuda文件夹
-tar -xvf cudnn-linux-x86_64-8.8.1.3_cuda11-archive.tar
+tar -zxvf cudnn-linux-x86_64-8.8.1.3_cuda11-archive.tar.xz
 #将cuda文件夹内的文件复制到/usr/local/cuda/中
 sudo cp cuda/include/* /usr/local/cuda/include/
 sudo cp cuda/lib64/* /usr/local/cuda/lib64/
-
 ```
 
 ### 5. 配置环境变量
@@ -70,29 +81,22 @@ sudo vim /etc/profile
 ```
 在文件后面增加以下内容：
 ```
-export PATH=/usr/local/cuda-10.1/bin:$PATH
-export LD_LIBRARY_PATH=/usr/lcoal/cuda-10.1/lib64:$LD_LIBRARY_PATH
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/lcoal/cuda/lib64:$LD_LIBRARY_PATH
 ```
 保存并退出。
 
-> **注意**：第一个教程中配置环境变量路径有误，不应该加引号。  
-**技巧**：推荐使用软链接的方法配置环境路径，方便后续切换CUDA版本。  
-**技巧**：环境变量可以不添加到`~/.bashrc`下，而是添加到`/etc/profile`下，前者是用户变量，后者是全局变量。  
-**技巧**：修改完环境变量后，需要使用`source /etc/profile`激活更改，或者重新登录shell。
-
-### 双CUDA
-[ubuntu 安装多个CUDA版本并可以随时切换](https://blog.csdn.net/yinxingtianxia/article/details/80462892)
-
+### 6. 查看配置结果
 ```shell
+# 查看显卡情况
+nvidia-smi
 # 查看cuda版本
 nvcc -V
+# 查看cudnn版本
+cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
 ```
 
-## 安装第二个CUDA 10.0
-```shell
-sudo ./cuda_10.0.130_410.48_linux.run
-```
-
+### 安装CUDA的选项参考
 ```shell
 Do you accept the previously read EULA?
 accept/decline/quit: accept
@@ -110,28 +114,14 @@ Do you want to install a symbolic link at /usr/local/cuda?
 (y)es/(n)o/(q)uit: y
 
 Install the CUDA 10.0 Samples?
-(y)es/(n)o/(q)uit: y
-
-Enter CUDA Samples Location
- [ default is /home/viewer ]: 
+(y)es/(n)o/(q)uit: n
 ```
 
-建立软链接：
-```shell
-sudo rm -rf cuda
-sudo ln -s /usr/local/cuda-10.0 /usr/local/cuda
-```
-
-## 卸载显卡驱动
-```shell
-# 两种卸载方式
-# 使用本地安装包安装的驱动使用这种方式
-sudo /usr/bin/nvidia-uninstall
-
-# 使用apt安装的驱动使用这种方式
-sudo apt --purge remove nvidia*
-sudo apt autoremove
-```
+### 注意与技巧
+> **注意**：第一个教程中配置环境变量路径有误，不应该加引号。  
+**技巧**：推荐使用软链接的方法配置环境路径，方便后续配置多个CUDA版本：[ubuntu 安装多个CUDA版本并可以随时切换](https://blog.csdn.net/yinxingtianxia/article/details/80462892)
+**技巧**：环境变量可以不添加到`~/.bashrc`下，而是添加到`/etc/profile`下，前者是用户变量，后者是全局变量。  
+**技巧**：修改完环境变量后，需要使用`source /etc/profile`激活更改，或者重新登录shell。
 
 ## 重装显卡驱动出错
 ### 报错一：
