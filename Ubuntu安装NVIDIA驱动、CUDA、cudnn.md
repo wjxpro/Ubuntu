@@ -21,9 +21,9 @@
 + cudnn：`cudnn-linux-x86_64-8.8.1.3_cuda11-archive.tar.xz`
 
 ### 1. 安装依赖（gcc）
+确保网络连接，使用`apt`安装：
 ```bash
 sudo apt update
-sudo apt install vim
 sudo apt install build-essential
 ```
 
@@ -64,15 +64,22 @@ sudo bash NVIDIA-Linux-x86_64-470.182.03.run
 
 #安装CUDA
 sudo bash cuda_11.3.1_465.19.01_linux.run
-# 为CUDA建立软链接（CUDA安装包有可能包含该功能）
+# 为CUDA建立软链接（CUDA安装包可能包含该功能）
 sudo ln -s /usr/local/cuda-11.3 /usr/local/cuda
 
 #安装cudnn
 # 解压cudnn，生成cuda文件夹
-tar -zxvf cudnn-linux-x86_64-8.8.1.3_cuda11-archive.tar.xz
+tar -xvf cudnn-linux-x86_64-8.8.1.3_cuda11-archive.tar.xz
 #将cuda文件夹内的文件复制到/usr/local/cuda/中
 sudo cp cuda/include/* /usr/local/cuda/include/
 sudo cp cuda/lib64/* /usr/local/cuda/lib64/
+```
+
+推荐使用软链接的方法配置CUDA，方便后续配置多个CUDA版本并可以随时切换：[ubuntu 安装多个CUDA版本并可以随时切换](https://blog.csdn.net/yinxingtianxia/article/details/80462892)
+
+```bash
+sudo rm -rf /usr/local/cuda
+sudo ln -s /usr/local/cuda-10.1 /usr/local/cuda
 ```
 
 ### 5. 配置环境变量
@@ -84,7 +91,10 @@ sudo vim /etc/profile
 export PATH=/usr/local/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/usr/lcoal/cuda/lib64:$LD_LIBRARY_PATH
 ```
-保存并退出。
+保存并退出。然后使用`source /etc/profile`激活更改，或者重新登录shell。
+
+> **注意**：第一个教程中配置环境变量路径有误，不应该加引号。
+**技巧**：环境变量也可以添加到`~/.bashrc`下，前者是用户变量，后者是全局变量。
 
 ### 6. 查看配置结果
 ```shell
@@ -117,17 +127,13 @@ Install the CUDA 10.0 Samples?
 (y)es/(n)o/(q)uit: n
 ```
 
-### 注意与技巧
-> **注意**：第一个教程中配置环境变量路径有误，不应该加引号。  
-**技巧**：推荐使用软链接的方法配置环境路径，方便后续配置多个CUDA版本：[ubuntu 安装多个CUDA版本并可以随时切换](https://blog.csdn.net/yinxingtianxia/article/details/80462892)
-**技巧**：环境变量可以不添加到`~/.bashrc`下，而是添加到`/etc/profile`下，前者是用户变量，后者是全局变量。  
-**技巧**：修改完环境变量后，需要使用`source /etc/profile`激活更改，或者重新登录shell。
-
 ## 重装显卡驱动出错
 ### 报错一：
 ```
 An NVIDIA kernel module ‘nvidia-drm‘ appears to already be loaded in your kernel...
 ```
+报错的意思是，驱动卸载后，nvidia的内核模块还加载在内核中，需要在tty界面卸载掉此内核模块。
+
 进入tty界面：
 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F1~F12</kbd>
 
@@ -155,3 +161,5 @@ The CC version check failed
 The kernel was built with gcc version XXX, but the current compiler version is cc XXX...
 ```
 用`sudo /usr/bin/nvidia-uninstall`命令卸载显卡驱动，然后重装。
+
+也可能是因为`build-essential`依赖没有正确安装。

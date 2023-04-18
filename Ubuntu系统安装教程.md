@@ -27,8 +27,9 @@
 2. 点击`Install Ubuntu 18.04 LTS`
 3. `Welcone`：欢迎界面，选择语言English（或中文）
 4. `Keyboard layout`：键盘布局，默认即可
-5. `Updates and other software`：更新和其他软件，个人用户可以选择正常安装，服务器因为不需要其他工具可以选择`Minimal installation`最小安装
-6. `Installation type`：安装类型，手动分区选择`Something else`：
+5. `wireless`：无线设置，选择我现在不想连接wifi无线网络（wlan口可以直接拔掉网线）
+6. `Updates and other software`：更新和其他软件，选择正常安装，服务器因为不需要其他工具，为了节省空间也可以选择`Minimal installation`最小安装
+7. `Installation type`：安装类型，手动分区选择`Something else`：
     - `New Partition Table`：新建分区表，可以格式化之前的磁盘分区表，然后从零分区，也就是格式化磁盘重装电脑，**安装双系统不要点！！！** 会把Windows系统的分区表删掉。
     - 选择需要安装系统的磁盘，选中`free space`空闲空间，然后点击<kbd>+</kbd>，或者直接双击空闲空间，按照如下方式依次分区：
         <table>
@@ -60,7 +61,7 @@
             <tr>
                 <td rowspan="2">服务器</td>
                 <td>根目录</td>
-                <td>64G</td>
+                <td>128G</td>
                 <td>主分区？</td>
                 <td>EXT4</td>
                 <td>'/'</td>
@@ -74,10 +75,12 @@
             </tr>
         </table>
 
-        > **注**：服务器端通常为多用户使用，推荐将`根目录`与`home`分开。如果某个用户不小心修改了系统文件导致系统损坏，则重做系统时只需要重新挂载`home`，方便保留用户文件。
+        > **注**：服务器通常为多用户使用，推荐将`根目录`与`home`分开。如果某个用户不小心修改了系统文件导致系统损坏，则重做系统时不格式化`home`所在分区并重新挂载，然后使用的时候`home`修改文件的所有者，就可以保留用户文件。
+
+        > **注**：如果先在安装系统时
     - `Device for boot loader installation`：安装启动引导器的设备，选择刚刚分好的EFI分区
     - `Install Now`：现在安装，继续
-7. `Where are you?`：选择时区，东八区
-8. `Who are you?`：填写用户信息
+8. `Where are you?`：选择地区，shanghai，东八区
+9. `Who are you?`：填写用户信息
 
 等待安装，完成后重启即可。
