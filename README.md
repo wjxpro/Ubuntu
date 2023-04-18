@@ -58,9 +58,8 @@ Ubuntu免费，Windows收费。
 ### 3. 文件系统
 [Ubuntu文件系统.md](Ubuntu文件系统（未完成）.md)
 
-## 维护人员
-### 服务器维护
-[Ubuntu服务器维护.md](Ubuntu服务器维护（持续更新）.md)
-
-### 高级玩法
+### 4. 高级玩法
 [Ubuntu高级玩法.md](Ubuntu高级玩法（持续更新）.md)
+
+## 服务器维护
+[Ubuntu服务器维护.md](Ubuntu服务器维护（持续更新）.md)

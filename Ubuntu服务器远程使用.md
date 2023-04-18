@@ -39,6 +39,8 @@ Windows用户可以使用cmd连接服务器，也可以使用一些第三方shel
 ### 使用VS Code进行远程调试
 详见[VS Code远程调试.md](../开发环境/VS_Code远程调试.md)
 
+或本人csdn博客：[VS Code远程调试](https://blog.csdn.net/qq_44119557/article/details/124277282)
+
 ## 四、找到服务器IP的方法
 ### 情况一：服务器和用户机在一个局域网下
 在服务器终端输入：
